@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIAGA - Kantor Imigrasi Kelas I Non TPI Agam</title>
+  <!-- Favicon Logo Imigrasi Terbaru -->
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Logo_Imigrasi_Indonesia.png/600px-Logo_Imigrasi_Indonesia.png">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons CDN -->
@@ -52,10 +54,14 @@
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
-  <!-- TOP NAVBAR -->
+  <!-- TOP NAVBAR HAS LOGO NEAR SIAGA -->
   <header class="bg-brand-navy text-white shadow-md sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('home')">
+        <!-- Logo Imigrasi Terbaru -->
+        <div class="w-9 h-9 bg-white p-1 rounded-full shadow-md flex items-center justify-center border border-brand-gold">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Logo_Imigrasi_Indonesia.png/600px-Logo_Imigrasi_Indonesia.png" alt="Logo Imigrasi" class="w-full h-full object-contain">
+        </div>
         <div>
           <h1 class="text-lg font-bold text-brand-gold tracking-wide leading-none">SIAGA</h1>
           <p class="text-[11px] text-slate-300 font-light">Kantor Imigrasi Kelas I Non TPI Agam</p>
@@ -83,7 +89,6 @@
   <section class="minang-pattern text-white py-8 px-4 shadow-inner">
     <div class="max-w-6xl mx-auto text-center md:text-left md:flex md:items-center md:justify-between">
       <div>
-        <span class="inline-block px-3 py-1 bg-brand-gold/20 text-brand-gold text-xs font-bold rounded-full mb-2 border border-brand-gold/30">Layanan Publik Digital Terpadu</span>
         <h2 class="text-2xl md:text-3xl font-extrabold tracking-wide">Sistem Informasi & Pengaduan Masyarakat</h2>
         <p class="text-xs md:text-sm text-slate-300 mt-1 max-w-2xl">Akses syarat paspor, pendaftaran M-Paspor, izin tinggal WNA, hingga pengaduan WhatsApp langsung ke Kantor Imigrasi Agam.</p>
       </div>
@@ -113,12 +118,12 @@
           <p class="text-xs text-slate-500 mt-1">Syarat Paspor Baru, Anak, Penggantian, Hilang, Rusak & Tarif PNBP.</p>
         </div>
 
-        <!-- Card 2: Pengaduan WA -->
+        <!-- Card 2: Pengaduan WhatsApp -->
         <div onclick="showPage('pengaduan')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-brand-gold transition cursor-pointer group">
           <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
             <i class="fa-brands fa-whatsapp text-2xl"></i>
           </div>
-          <h3 class="text-sm md:text-base font-bold text-slate-800">Layanan Informasi & Pengaduan</h3>
+          <h3 class="text-sm md:text-base font-bold text-slate-800">Pengaduan WhatsApp</h3>
           <p class="text-xs text-slate-500 mt-1">Kirim pesan pengaduan resmi via WhatsApp 085274656300.</p>
         </div>
 
@@ -165,7 +170,7 @@
     <div id="page-info" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 hidden">
       <div class="flex items-center justify-between border-b pb-3">
         <h3 class="text-base md:text-lg font-bold text-brand-navy flex items-center">
-          <i class="fa-solid fa-passport text-brand-gold mr-2"></i> Information Persyaratan & Tarif Paspor RI
+          <i class="fa-solid fa-passport text-brand-gold mr-2"></i> Informasi Persyaratan & Tarif Paspor RI
         </h3>
         <button onclick="showPage('home')" class="text-xs text-slate-400 hover:text-slate-600">
           <i class="fa-solid fa-xmark text-lg"></i>
@@ -299,11 +304,11 @@
       </div>
     </div>
 
-    <!-- 3. LAYANAN INFORMASI & PENGADUAN WA PAGE -->
+    <!-- 3. LAYANAN PENGADUAN WA PAGE -->
     <div id="page-pengaduan" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 hidden">
       <div class="flex items-center justify-between border-b pb-3">
         <h3 class="text-base md:text-lg font-bold text-brand-navy flex items-center">
-          <i class="fa-brands fa-whatsapp text-emerald-600 text-xl mr-2"></i> Layanan Informasi & Pengaduan
+          <i class="fa-brands fa-whatsapp text-emerald-600 text-xl mr-2"></i> Layanan Pengaduan WhatsApp
         </h3>
         <button onclick="showPage('home')" class="text-xs text-slate-400 hover:text-slate-600">
           <i class="fa-solid fa-xmark text-lg"></i>
@@ -434,7 +439,7 @@
       </div>
     </div>
 
-    <!-- 6. STATISTIK PENGADUAN PAGE -->
+    <!-- 6. STATISTIK PENGADUAN PAGE (KOSONG SIAP PAKAI) -->
     <div id="page-statistik" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 hidden">
       <div class="flex items-center justify-between border-b pb-3">
         <h3 class="text-base md:text-lg font-bold text-brand-navy flex items-center">
@@ -445,18 +450,19 @@
         </button>
       </div>
 
+      <!-- Stats Counters (Clear State) -->
       <div class="grid grid-cols-3 gap-3">
         <div class="bg-blue-50 border border-blue-200 p-3 rounded-xl text-center">
           <span class="text-xs font-bold text-blue-600 block">Total Laporan</span>
-          <span class="text-xl font-extrabold text-brand-navy">128</span>
+          <span class="text-xl font-extrabold text-brand-navy">0</span>
         </div>
         <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-center">
           <span class="text-xs font-bold text-emerald-600 block">Selesai</span>
-          <span class="text-xl font-extrabold text-emerald-700">118</span>
+          <span class="text-xl font-extrabold text-emerald-700">0</span>
         </div>
         <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-center">
           <span class="text-xs font-bold text-amber-600 block">Diproses</span>
-          <span class="text-xl font-extrabold text-amber-700">10</span>
+          <span class="text-xl font-extrabold text-amber-700">0</span>
         </div>
       </div>
 
@@ -473,7 +479,7 @@
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
       </div>
 
-      <!-- Table -->
+      <!-- Table Kosong -->
       <div class="overflow-x-auto">
         <table id="table-rekap-pengaduan" class="w-full text-left border-collapse text-xs md:text-sm">
           <thead>
@@ -484,20 +490,8 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100 text-slate-700">
-            <tr class="pengaduan-row">
-              <td class="p-2.5 font-medium">#AGM-1024 - Rahmat Hidayat</td>
-              <td class="p-2.5">Paspor Hilang</td>
-              <td class="p-2.5 text-center"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-xs font-bold">Selesai</span></td>
-            </tr>
-            <tr class="pengaduan-row">
-              <td class="p-2.5 font-medium">#AGM-1025 - Siti Aminah</td>
-              <td class="p-2.5">M-Paspor Error</td>
-              <td class="p-2.5 text-center"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-xs font-bold">Selesai</span></td>
-            </tr>
-            <tr class="pengaduan-row">
-              <td class="p-2.5 font-medium">#AGM-1026 - Ahmad Fauzi</td>
-              <td class="p-2.5">Perpanjang ITAS</td>
-              <td class="p-2.5 text-center"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-bold">Diproses</span></td>
+            <tr id="empty-row">
+              <td colspan="3" class="p-6 text-center text-slate-400 italic">Belum ada data laporan pengaduan.</td>
             </tr>
           </tbody>
         </table>
