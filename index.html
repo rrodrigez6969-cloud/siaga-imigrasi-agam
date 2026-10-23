@@ -315,50 +315,57 @@
         </button>
       </div>
 
-      <p class="text-xs md:text-sm text-slate-600">Pilih kategori layanan/pengaduan di bawah ini untuk terhubung langsung ke WhatsApp Kantor Imigrasi Agam:</p>
+      <p class="text-xs md:text-sm text-slate-600">Lengkapi formulir di bawah ini untuk mengirim pesan pengaduan resmi via WhatsApp sekaligus mencatatnya ke dalam Statistik Laporan:</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <div onclick="selectCategory('Pelayanan Paspor')" id="cat-paspor" class="p-4 rounded-xl border-2 border-brand-blue bg-blue-50/50 cursor-pointer transition flex items-center justify-between">
-          <div>
-            <h4 class="text-xs md:text-sm font-bold text-slate-800">Pelayanan Paspor</h4>
-            <p class="text-[11px] text-slate-500">Informasi permohonan & status paspor</p>
-          </div>
-          <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-        </div>
-
-        <div onclick="selectCategory('Izin Tinggal WNA')" id="cat-izin" class="p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-brand-blue cursor-pointer transition flex items-center justify-between">
-          <div>
-            <h4 class="text-xs md:text-sm font-bold text-slate-800">Izin Tinggal & Visa</h4>
-            <p class="text-[11px] text-slate-500">ITK, ITAS, ITAP & Visa WNA</p>
-          </div>
-          <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-        </div>
-
-        <div onclick="selectCategory('Pengawasan & Inteldak')" id="cat-inteldak" class="p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-brand-blue cursor-pointer transition flex items-center justify-between">
-          <div>
-            <h4 class="text-xs md:text-sm font-bold text-slate-800">Inteldak & Pengawasan</h4>
-            <p class="text-[11px] text-slate-500">Laporan keberadaan Orang Asing</p>
-          </div>
-          <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-        </div>
-      </div>
-
-      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-        <label class="block text-xs md:text-sm font-bold text-slate-700">
-          Kategori Terpilih: <span id="selected-cat-title" class="text-brand-blue">Pelayanan Paspor</span>
-        </label>
+      <form id="form-pengaduan" onsubmit="handlePengaduanSubmit(event)" class="bg-slate-50 p-4 md:p-5 rounded-xl border border-slate-200 space-y-4">
         
-        <textarea id="input-pesan" oninput="updateWAPreview()" rows="3" placeholder="Ketik rincian informasi atau pengaduan Anda di sini..." class="w-full text-xs md:text-sm p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-blue"></textarea>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Input Nama -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
+            <input type="text" id="input-nama" required oninput="updateWAPreview()" placeholder="Contoh: Budi Santoso" class="w-full text-xs md:text-sm p-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-blue bg-white">
+          </div>
 
-        <div class="bg-white p-3 rounded-lg border border-slate-200">
-          <span class="text-[10px] text-slate-400 font-bold block mb-1">Preview Format Pesan WhatsApp:</span>
-          <p id="wa-preview-text" class="text-xs text-slate-700 italic font-mono whitespace-pre-wrap">Halo, saya ingin menyampaikan informasi/pengaduan terkait *Pelayanan Paspor*.</p>
+          <!-- Input Tempat Tanggal Lahir -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Tempat, Tanggal Lahir <span class="text-red-500">*</span></label>
+            <input type="text" id="input-ttl" required oninput="updateWAPreview()" placeholder="Contoh: Bukittinggi, 12 Mei 1995" class="w-full text-xs md:text-sm p-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-blue bg-white">
+          </div>
         </div>
 
-        <button onclick="sendToWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm rounded-lg shadow-sm flex items-center justify-center transition">
-          <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Kirim Pesan ke WhatsApp (085274656300)
+        <!-- Pilih Kategori -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Kategori Pengaduan <span class="text-red-500">*</span></label>
+          <select id="select-kategori" onchange="updateWAPreview()" class="w-full text-xs md:text-sm p-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-blue bg-white">
+            <option value="Pelayanan Paspor">Pelayanan Paspor</option>
+            <option value="Izin Tinggal WNA">Izin Tinggal & Visa WNA</option>
+            <option value="Inteldak & Pengawasan">Inteldak & Pengawasan</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+
+        <!-- Input Rincian Pengaduan -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Rincian Pengaduan / Pertanyaan <span class="text-red-500">*</span></label>
+          <textarea id="input-pesan" required oninput="updateWAPreview()" rows="3" placeholder="Tuliskan rincian pengaduan atau pertanyaan Anda..." class="w-full text-xs md:text-sm p-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-blue bg-white"></textarea>
+        </div>
+
+        <!-- Preview Format Pesan WA -->
+        <div class="bg-white p-3 rounded-lg border border-slate-200">
+          <span class="text-[10px] text-slate-400 font-bold block mb-1">Preview Pesan WhatsApp:</span>
+          <p id="wa-preview-text" class="text-xs text-slate-700 italic font-mono whitespace-pre-wrap">Halo, saya ingin menyampaikan pengaduan:
+- *Nama*: -
+- *TTL*: -
+- *Kategori*: Pelayanan Paspor
+
+*Rincian Pengaduan*:
+-</p>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm rounded-lg shadow-sm flex items-center justify-center transition">
+          <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Kirim Pesan ke WhatsApp (085274656300) & Simpan Laporan
         </button>
-      </div>
+      </form>
     </div>
 
     <!-- 4. M-PASPOR PAGE -->
@@ -439,7 +446,7 @@
       </div>
     </div>
 
-    <!-- 6. STATISTIK PENGADUAN PAGE (KOSONG SIAP PAKAI) -->
+    <!-- 6. STATISTIK PENGADUAN PAGE (DYNAMICALLY UPDATED) -->
     <div id="page-statistik" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 hidden">
       <div class="flex items-center justify-between border-b pb-3">
         <h3 class="text-base md:text-lg font-bold text-brand-navy flex items-center">
@@ -450,19 +457,19 @@
         </button>
       </div>
 
-      <!-- Stats Counters (Clear State) -->
+      <!-- Dynamic Counters -->
       <div class="grid grid-cols-3 gap-3">
         <div class="bg-blue-50 border border-blue-200 p-3 rounded-xl text-center">
           <span class="text-xs font-bold text-blue-600 block">Total Laporan</span>
-          <span class="text-xl font-extrabold text-brand-navy">0</span>
-        </div>
-        <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-center">
-          <span class="text-xs font-bold text-emerald-600 block">Selesai</span>
-          <span class="text-xl font-extrabold text-emerald-700">0</span>
+          <span id="stat-total" class="text-xl font-extrabold text-brand-navy">0</span>
         </div>
         <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-center">
           <span class="text-xs font-bold text-amber-600 block">Diproses</span>
-          <span class="text-xl font-extrabold text-amber-700">0</span>
+          <span id="stat-proses" class="text-xl font-extrabold text-amber-700">0</span>
+        </div>
+        <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-center">
+          <span class="text-xs font-bold text-emerald-600 block">Selesai</span>
+          <span id="stat-selesai" class="text-xl font-extrabold text-emerald-700">0</span>
         </div>
       </div>
 
@@ -479,19 +486,19 @@
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
       </div>
 
-      <!-- Table Kosong -->
+      <!-- Table Realtime -->
       <div class="overflow-x-auto">
         <table id="table-rekap-pengaduan" class="w-full text-left border-collapse text-xs md:text-sm">
           <thead>
             <tr class="bg-slate-100 text-slate-600 border-b border-slate-200">
-              <th class="p-2.5 font-bold">No Tiket / Nama</th>
-              <th class="p-2.5 font-bold">Kategori</th>
+              <th class="p-2.5 font-bold">No Tiket / Nama / TTL</th>
+              <th class="p-2.5 font-bold">Kategori / Rincian</th>
               <th class="p-2.5 font-bold text-center">Status</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-100 text-slate-700">
+          <tbody id="table-tbody" class="divide-y divide-slate-100 text-slate-700">
             <tr id="empty-row">
-              <td colspan="3" class="p-6 text-center text-slate-400 italic">Belum ada data laporan pengaduan.</td>
+              <td colspan="3" class="p-6 text-center text-slate-400 italic">Belum ada data laporan pengaduan. Kirim pesan dari menu Pengaduan WhatsApp untuk menambah data.</td>
             </tr>
           </tbody>
         </table>
@@ -556,8 +563,9 @@
 
   <!-- JAVASCRIPT APP LOGIC -->
   <script>
-    let currentCategory = "Pelayanan Paspor";
     const OFFICIAL_WA = "6285274656300";
+    let laporanList = [];
+    let ticketCounter = 1001;
 
     function showPage(pageId) {
       const pages = ['home', 'info', 'pengaduan', 'mpaspor', 'izin', 'statistik', 'sosmed'];
@@ -574,28 +582,91 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function selectCategory(catName) {
-      currentCategory = catName;
-      document.getElementById('selected-cat-title').innerText = catName;
+    function updateWAPreview() {
+      const nama = document.getElementById('input-nama').value || '-';
+      const ttl = document.getElementById('input-ttl').value || '-';
+      const kategori = document.getElementById('select-kategori').value;
+      const rincian = document.getElementById('input-pesan').value || '-';
+
+      const previewText = `Halo, saya ingin menyampaikan pengaduan:
+- *Nama*: ${nama}
+- *TTL*: ${ttl}
+- *Kategori*: ${kategori}
+
+*Rincian Pengaduan*:
+${rincian}`;
+
+      document.getElementById('wa-preview-text').innerText = previewText;
+    }
+
+    function handlePengaduanSubmit(e) {
+      e.preventDefault();
+
+      const nama = document.getElementById('input-nama').value;
+      const ttl = document.getElementById('input-ttl').value;
+      const kategori = document.getElementById('select-kategori').value;
+      const rincian = document.getElementById('input-pesan').value;
+
+      const ticketNo = `#AGM-${ticketCounter++}`;
+
+      // Simpan Data Laporan
+      laporanList.unshift({
+        ticketNo: ticketNo,
+        nama: nama,
+        ttl: ttl,
+        kategori: kategori,
+        rincian: rincian,
+        status: 'Diproses'
+      });
+
+      // Update UI Statistik
+      renderStatistikTable();
+
+      // Format WhatsApp Text
+      const waMsg = `Halo, saya ingin menyampaikan pengaduan:
+- *Nama*: ${nama}
+- *TTL*: ${ttl}
+- *Kategori*: ${kategori}
+
+*Rincian Pengaduan*:
+${rincian}`;
+
+      // Buka WA
+      window.open(`https://wa.me/${OFFICIAL_WA}?text=${encodeURIComponent(waMsg)}`, '_blank');
+
+      // Reset Form
+      document.getElementById('form-pengaduan').reset();
       updateWAPreview();
     }
 
-    function updateWAPreview() {
-      const text = document.getElementById('input-pesan').value;
-      let msg = `Halo, saya ingin menyampaikan informasi/pengaduan terkait *${currentCategory}*.`;
-      if (text.trim() !== "") {
-        msg += `\n\n*Rincian Pesan:*\n${text}`;
-      }
-      document.getElementById('wa-preview-text').innerText = msg;
-    }
+    function renderStatistikTable() {
+      const tbody = document.getElementById('table-tbody');
+      
+      document.getElementById('stat-total').innerText = laporanList.length;
+      document.getElementById('stat-proses').innerText = laporanList.filter(l => l.status === 'Diproses').length;
+      document.getElementById('stat-selesai').innerText = laporanList.filter(l => l.status === 'Selesai').length;
 
-    function sendToWhatsApp() {
-      const text = document.getElementById('input-pesan').value;
-      let msg = `Halo, saya ingin menyampaikan informasi/pengaduan terkait *${currentCategory}*.`;
-      if (text.trim() !== "") {
-        msg += `\n\n*Rincian Pesan:*\n${text}`;
+      if (laporanList.length === 0) {
+        tbody.innerHTML = `<tr id="empty-row"><td colspan="3" class="p-6 text-center text-slate-400 italic">Belum ada data laporan pengaduan. Kirim pesan dari menu Pengaduan WhatsApp untuk menambah data.</td></tr>`;
+        return;
       }
-      window.open(`https://wa.me/${OFFICIAL_WA}?text=${encodeURIComponent(msg)}`, '_blank');
+
+      tbody.innerHTML = laporanList.map(item => `
+        <tr class="pengaduan-row hover:bg-slate-50 transition">
+          <td class="p-2.5 font-medium">
+            <span class="font-bold text-brand-navy">${item.ticketNo}</span><br>
+            <span class="text-slate-700">${item.nama}</span><br>
+            <span class="text-[10px] text-slate-400">${item.ttl}</span>
+          </td>
+          <td class="p-2.5">
+            <span class="font-bold text-xs text-brand-blue block mb-0.5">${item.kategori}</span>
+            <p class="text-slate-600 text-xs">${item.rincian}</p>
+          </td>
+          <td class="p-2.5 text-center">
+            <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-[10px] font-bold inline-block">${item.status}</span>
+          </td>
+        </tr>
+      `).join('');
     }
 
     function toggleAccordion(id) {
@@ -655,14 +726,16 @@
     }
 
     function downloadCSVReport() {
-      let csvContent = "data:text/csv;charset=utf-8,No Tiket / Nama,Kategori,Status\n";
-      const rows = document.querySelectorAll('.pengaduan-row');
-      rows.forEach(row => {
-        if (row.style.display !== "none") {
-          const cols = row.querySelectorAll('td');
-          csvContent += `"${cols[0].innerText}","${cols[1].innerText}","${cols[2].innerText}"\n`;
-        }
+      if (laporanList.length === 0) {
+        alert("Belum ada data laporan pengaduan untuk diunduh.");
+        return;
+      }
+
+      let csvContent = "data:text/csv;charset=utf-8,No Tiket,Nama,TTL,Kategori,Rincian,Status\n";
+      laporanList.forEach(item => {
+        csvContent += `"${item.ticketNo}","${item.nama}","${item.ttl}","${item.kategori}","${item.rincian.replace(/"/g, '""')}","${item.status}"\n`;
       });
+
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
