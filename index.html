@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIAGA - Kantor Imigrasi Kelas I Non TPI Agam</title>
-  <!-- Favicon Logo Imigrasi -->
-  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Logo_Imigrasi_Indonesia.png/600px-Logo_Imigrasi_Indonesia.png">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons CDN -->
@@ -25,8 +23,7 @@
               blue: '#134074',
               gold: '#d4af37',
               accent: '#0077b6',
-              bgLight: '#f4f7f6',
-              card: '#ffffff',
+              bgLight: '#f8fafc',
             }
           }
         }
@@ -35,10 +32,11 @@
   </script>
   <style>
     .custom-scroll::-webkit-scrollbar {
-      width: 4px;
+      width: 6px;
+      height: 6px;
     }
     .custom-scroll::-webkit-scrollbar-track {
-      background: #f1f1f1;
+      background: #f1f5f9;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
       background: #cbd5e1;
@@ -49,730 +47,526 @@
       background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px), radial-gradient(#d4af37 0.75px, #0b2545 0.75px);
       background-size: 30px 30px;
       background-position: 0 0, 15px 15px;
-      opacity: 0.95;
     }
   </style>
 </head>
-<body class="bg-slate-900 text-slate-800 font-sans min-h-screen flex flex-col items-center justify-center p-2 sm:p-6">
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
-  <!-- Outer Switch Bar (For View Modes) -->
-  <div class="mb-4 flex items-center justify-between w-full max-w-4xl bg-slate-800 text-white p-3 rounded-xl shadow-lg border border-slate-700">
-    <div class="flex items-center space-x-2">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Logo_Imigrasi_Indonesia.png/600px-Logo_Imigrasi_Indonesia.png" alt="Logo Imigrasi" class="w-6 h-6 object-contain">
-      <span class="text-xs sm:text-sm font-medium text-slate-200">SIAGA v2.0 - Imigrasi Agam</span>
-    </div>
-    <div class="flex items-center space-x-2">
-      <button onclick="toggleView('mobile')" id="btn-mobile-view" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-gold text-slate-900 transition hover:bg-yellow-400">
-        <i class="fa-solid fa-mobile-screen-button mr-1"></i> Tampilan HP
-      </button>
-      <button onclick="toggleView('desktop')" id="btn-desktop-view" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-700 text-slate-300 transition hover:bg-slate-600">
-        <i class="fa-solid fa-desktop mr-1"></i> Tampilan Penuh
-      </button>
-    </div>
-  </div>
-
-  <!-- Device Container Frame -->
-  <div id="phone-frame" class="w-full max-w-[380px] bg-slate-800 rounded-[48px] shadow-2xl overflow-hidden border-[8px] border-slate-800 ring-1 ring-slate-700 relative transition-all duration-300">
-    
-    <!-- Phone Top Notch / Bar -->
-    <div class="bg-slate-900 px-6 py-2 flex justify-between items-center text-white text-xs select-none">
-      <span class="font-semibold text-[11px]">9:41</span>
-      <div class="w-16 h-3 bg-slate-800 rounded-full mx-auto my-0.5"></div>
-      <div class="flex items-center space-x-1 text-[10px]">
-        <i class="fa-solid fa-signal"></i>
-        <i class="fa-solid fa-wifi"></i>
-        <i class="fa-solid fa-battery-full"></i>
+  <!-- TOP NAVBAR -->
+  <header class="bg-brand-navy text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('home')">
+        <div>
+          <h1 class="text-lg font-bold text-brand-gold tracking-wide leading-none">SIAGA</h1>
+          <p class="text-[11px] text-slate-300 font-light">Kantor Imigrasi Kelas I Non TPI Agam</p>
+        </div>
       </div>
-    </div>
-
-    <!-- Inner Scrollable Mobile Screen Body -->
-    <div id="mobile-screen-body" class="bg-slate-50 h-[680px] overflow-y-auto custom-scroll relative flex flex-col justify-between">
       
-      <!-- MAIN CONTAINER PAGES -->
-      <div class="flex-1 pb-4">
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex space-x-6 text-sm font-medium">
+        <button onclick="showPage('home')" id="nav-d-home" class="hover:text-brand-gold transition py-1">Beranda</button>
+        <button onclick="showPage('info')" id="nav-d-info" class="hover:text-brand-gold transition py-1">Paspor</button>
+        <button onclick="showPage('pengaduan')" id="nav-d-pengaduan" class="hover:text-brand-gold transition py-1">Pengaduan WA</button>
+        <button onclick="showPage('mpaspor')" id="nav-d-mpaspor" class="hover:text-brand-gold transition py-1">M-Paspor</button>
+        <button onclick="showPage('izin')" id="nav-d-izin" class="hover:text-brand-gold transition py-1">Izin Tinggal</button>
+        <button onclick="showPage('statistik')" id="nav-d-statistik" class="hover:text-brand-gold transition py-1">Statistik</button>
+        <button onclick="showPage('sosmed')" id="nav-d-sosmed" class="hover:text-brand-gold transition py-1">Media Sosial</button>
+      </nav>
 
-        <!-- HEADER BANNER DENGAN LOGO RESMI IMIGRASI -->
-        <div class="minang-pattern text-white px-5 pt-6 pb-8 rounded-b-[28px] shadow-md relative">
-          <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center space-x-3">
-              <div class="w-12 h-12 bg-white p-1 rounded-full shadow-md flex items-center justify-center border border-brand-gold">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Logo_Imigrasi_Indonesia.png/600px-Logo_Imigrasi_Indonesia.png" alt="Logo Imigrasi" class="w-full h-full object-contain">
-              </div>
-              <div>
-                <h1 class="text-sm font-bold text-slate-100 leading-tight">Kantor Imigrasi Kelas I Non TPI Agam</h1>
-              </div>
-            </div>
-          </div>
-          
-          <div class="mt-3">
-            <h2 class="text-2xl font-extrabold text-brand-gold tracking-wide">SIAGA</h2>
-            <p class="text-[11px] text-slate-200 font-light">Sistem Informasi & Pengaduan Masyarakat Digital</p>
-          </div>
-        </div>
-
-        <!-- 1. BERANDA / HOME PAGE PAGE -->
-        <div id="page-home" class="px-4 -mt-4 space-y-4">
-          <!-- Banner Pengumuman -->
-          <div class="bg-amber-50 border border-amber-200 p-2.5 rounded-xl shadow-sm flex items-center space-x-2">
-            <i class="fa-solid fa-bullhorn text-amber-600 text-sm"></i>
-            <p class="text-[10px] text-amber-900 font-medium">Layanan Paspor dan Izin Tinggal kini semakin cepat melalui Portal SIAGA.</p>
-          </div>
-
-          <!-- Grid Menu Utama (6 Menu) -->
-          <div class="grid grid-cols-2 gap-3">
-            
-            <!-- Menu 1: Informasi Layanan Paspor -->
-            <button onclick="showPage('info')" class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-gold transition text-left group">
-              <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-blue flex items-center justify-center mb-2 group-hover:scale-105 transition">
-                <i class="fa-solid fa-passport text-lg"></i>
-              </div>
-              <h3 class="text-xs font-bold text-slate-800">Informasi Layanan</h3>
-              <p class="text-[10px] text-slate-400 mt-0.5">Syarat & Tarif Paspor Baru/Penggantian</p>
-            </button>
-
-            <!-- Menu 2: Layanan Informasi & Pengaduan WA -->
-            <button onclick="showPage('pengaduan')" class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-gold transition text-left group">
-              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-2 group-hover:scale-105 transition">
-                <i class="fa-brands fa-whatsapp text-xl"></i>
-              </div>
-              <h3 class="text-xs font-bold text-slate-800">Layanan & Pengaduan</h3>
-              <p class="text-[10px] text-slate-400 mt-0.5">Kirim Pesan Pengaduan Langsung</p>
-            </button>
-
-            <!-- Menu 3: M-Paspor -->
-            <button onclick="showPage('mpaspor')" class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-gold transition text-left group">
-              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-2 group-hover:scale-105 transition">
-                <i class="fa-solid fa-mobile-retro text-lg"></i>
-              </div>
-              <h3 class="text-xs font-bold text-slate-800">M-Paspor</h3>
-              <p class="text-[10px] text-slate-400 mt-0.5">Panduan & Link Download Resmi</p>
-            </button>
-
-            <!-- Menu 4: Visa & Izin Tinggal -->
-            <button onclick="showPage('izin')" class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-gold transition text-left group">
-              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-2 group-hover:scale-105 transition">
-                <i class="fa-solid fa-id-card text-lg"></i>
-              </div>
-              <h3 class="text-xs font-bold text-slate-800">Visa & Izin Tinggal</h3>
-              <p class="text-[10px] text-slate-400 mt-0.5">ITK, ITAS, ITAP & eVisa Portal</p>
-            </button>
-
-            <!-- Menu 5: Media Sosial -->
-            <button onclick="showPage('sosmed')" class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-gold transition text-left group">
-              <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center mb-2 group-hover:scale-105 transition">
-                <i class="fa-solid fa-hashtag text-lg"></i>
-              </div>
-              <h3 class="text-xs font-bold text-slate-800">Media Sosial</h3>
-              <p class="text-[10px] text-slate-400 mt-0.5">Instagram, TikTok, FB, Twitter, YT</p>
-            </button>
-
-            <!-- Menu 6: Statistik Pengaduan -->
-            <button onclick="showPage('statistik')" class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-100 hover:border-brand-gold transition text-left group">
-              <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-2 group-hover:scale-105 transition">
-                <i class="fa-solid fa-chart-column text-lg"></i>
-              </div>
-              <h3 class="text-xs font-bold text-slate-800">Statistik Pengaduan</h3>
-              <p class="text-[10px] text-slate-400 mt-0.5">Rekapitulasi, Cari & Unduh CSV</p>
-            </button>
-
-          </div>
-        </div>
-
-        <!-- 2. INFORMASI LAYANAN PASPOR PAGE -->
-        <div id="page-info" class="p-4 space-y-3 hidden">
-          <div class="flex items-center justify-between border-b pb-2">
-            <h3 class="text-sm font-bold text-brand-navy flex items-center">
-              <i class="fa-solid fa-passport text-brand-gold mr-2"></i> Layanan Paspor RI
-            </h3>
-            <button onclick="showPage('home')" class="text-xs text-slate-500 hover:text-brand-navy">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <!-- Quick Filter Pills -->
-          <div class="flex overflow-x-auto space-x-1.5 py-1 custom-scroll text-[11px]">
-            <button onclick="filterPaspor('baru')" id="tab-paspor-baru" class="px-3 py-1.5 font-bold rounded-lg bg-brand-navy text-white shadow-sm transition whitespace-nowrap">Paspor Baru</button>
-            <button onclick="filterPaspor('anak')" id="tab-paspor-anak" class="px-3 py-1.5 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition whitespace-nowrap">Paspor Anak</button>
-            <button onclick="filterPaspor('penggantian')" id="tab-paspor-penggantian" class="px-3 py-1.5 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition whitespace-nowrap">Penggantian</button>
-            <button onclick="filterPaspor('hilang')" id="tab-paspor-hilang" class="px-3 py-1.5 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition whitespace-nowrap">Paspor Hilang</button>
-            <button onclick="filterPaspor('rusak')" id="tab-paspor-rusak" class="px-3 py-1.5 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition whitespace-nowrap">Paspor Rusak</button>
-            <button onclick="filterPaspor('tarif')" id="tab-paspor-tarif" class="px-3 py-1.5 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition whitespace-nowrap">Tarif PNBP</button>
-          </div>
-
-          <!-- Accordion 1: Paspor Baru Orang Dewasa -->
-          <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <button onclick="toggleAccordion('baru')" class="w-full p-3 text-left font-bold text-xs text-brand-navy flex justify-between items-center bg-slate-50">
-              <span><i class="fa-solid fa-user-check text-brand-gold mr-1.5"></i> Persyaratan Paspor Baru (Dewasa)</span>
-              <i id="icon-baru" class="fa-solid fa-chevron-up text-brand-blue"></i>
-            </button>
-            <div id="acc-baru" class="p-3 text-xs space-y-2 border-t border-slate-100">
-              <ul class="list-disc list-inside text-slate-600 space-y-1">
-                <li><strong>e-KTP</strong> (Kartu Tanda Penduduk) asli & fotokopi.</li>
-                <li><strong>Kartu Keluarga (KK)</strong> asli & fotokopi.</li>
-                <li><strong>Akta Kelahiran / Akta Nikah / Ijazah / Surat Baptis</strong> (pilih salah satu yang memuat nama, tempat tanggal lahir, serta nama orang tua).</li>
-                <li>Surat Rekomendasi Instansi (khusus untuk tujuan kerja/umrah jika diperlukan).</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Accordion 2: Paspor Anak-Anak -->
-          <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <button onclick="toggleAccordion('anak')" class="w-full p-3 text-left font-bold text-xs text-brand-navy flex justify-between items-center bg-slate-50">
-              <span><i class="fa-solid fa-child text-brand-gold mr-1.5"></i> Persyaratan Paspor Anak (Di Bawah 17 Tahun)</span>
-              <i id="icon-anak" class="fa-solid fa-chevron-down text-slate-400"></i>
-            </button>
-            <div id="acc-anak" class="p-3 text-xs space-y-2 border-t border-slate-100 hidden">
-              <ul class="list-disc list-inside text-slate-600 space-y-1">
-                <li><strong>e-KTP Kedua Orang Tua</strong> (Asli & Fotokopi).</li>
-                <li><strong>Kartu Keluarga (KK)</strong> memuat nama anak.</li>
-                <li><strong>Akta Kelahiran Anak</strong> / Surat Kenal Lahir.</li>
-                <li><strong>Buku Nikah / Akta Perkawinan</strong> Orang Tua.</li>
-                <li><strong>Paspor Lama Kedua Orang Tua</strong> (jika ada).</li>
-                <li><strong>Surat Pernyataan Orang Tua</strong> (bermaterai 10.000).</li>
-                <li><span class="text-amber-700 font-semibold">*Catatan: Kedua/salah satu orang tua wajib hadir saat wawancara.</span></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Accordion 3: Paspor Penggantian -->
-          <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <button onclick="toggleAccordion('penggantian')" class="w-full p-3 text-left font-bold text-xs text-brand-navy flex justify-between items-center bg-slate-50">
-              <span><i class="fa-solid fa-rotate text-brand-gold mr-1.5"></i> Paspor Penggantian (Habis Masa Berlaku)</span>
-              <i id="icon-penggantian" class="fa-solid fa-chevron-down text-slate-400"></i>
-            </button>
-            <div id="acc-penggantian" class="p-3 text-xs space-y-2 border-t border-slate-100 hidden">
-              <p class="text-slate-600">Untuk paspor terbitan tahun 2009 ke atas di dalam negeri:</p>
-              <ul class="list-disc list-inside text-slate-600 space-y-1">
-                <li><strong>e-KTP Asli</strong> & Fotokopi.</li>
-                <li><strong>Paspor Lama Asli</strong>.</li>
-              </ul>
-              <p class="text-[10px] text-slate-500 italic">*Jika terdapat perubahan data, wajib menyertakan dokumen pendukung (Akta/KK/Nikah).</p>
-            </div>
-          </div>
-
-          <!-- Accordion 4: Paspor Hilang -->
-          <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <button onclick="toggleAccordion('hilang')" class="w-full p-3 text-left font-bold text-xs text-brand-navy flex justify-between items-center bg-slate-50">
-              <span><i class="fa-solid fa-triangle-exclamation text-amber-500 mr-1.5"></i> Paspor Hilang</span>
-              <i id="icon-hilang" class="fa-solid fa-chevron-down text-slate-400"></i>
-            </button>
-            <div id="acc-hilang" class="p-3 text-xs space-y-2 border-t border-slate-100 hidden">
-              <ul class="list-disc list-inside text-slate-600 space-y-1">
-                <li><strong>Surat Laporan Kehilangan</strong> dari Kepolisian setempat.</li>
-                <li><strong>e-KTP & Kartu Keluarga (KK)</strong> Asli.</li>
-                <li><strong>Akta Lahir / Ijazah / Buku Nikah</strong>.</li>
-                <li>Fotokopi Paspor Lama (jika ada).</li>
-                <li>Wajib melalui proses **BAP (Berita Acara Pemeriksaan)** oleh Seksi Inteldak Imigrasi Agam.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Accordion 5: Paspor Rusak -->
-          <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <button onclick="toggleAccordion('rusak')" class="w-full p-3 text-left font-bold text-xs text-brand-navy flex justify-between items-center bg-slate-50">
-              <span><i class="fa-solid fa-heart-crack text-red-500 mr-1.5"></i> Paspor Rusak</span>
-              <i id="icon-rusak" class="fa-solid fa-chevron-down text-slate-400"></i>
-            </button>
-            <div id="acc-rusak" class="p-3 text-xs space-y-2 border-t border-slate-100 hidden">
-              <ul class="list-disc list-inside text-slate-600 space-y-1">
-                <li><strong>Fisik Paspor yang Rusak</strong>.</li>
-                <li><strong>e-KTP & Kartu Keluarga (KK)</strong>.</li>
-                <li>Dokumen Akta Lahir / Ijazah / Buku Nikah.</li>
-                <li>Surat Permohonan Penggantian Paspor Rusak.</li>
-                <li>Pemeriksaan BAP oleh petugas keimigrasian.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Accordion 6: Tarif PNBP Terbaru -->
-          <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <button onclick="toggleAccordion('tarif')" class="w-full p-3 text-left font-bold text-xs text-brand-navy flex justify-between items-center bg-slate-50">
-              <span><i class="fa-solid fa-money-bill-wave text-emerald-600 mr-1.5"></i> Rincian Tarif PNBP Paspor</span>
-              <i id="icon-tarif" class="fa-solid fa-chevron-down text-slate-400"></i>
-            </button>
-            <div id="acc-tarif" class="p-3 text-xs border-t border-slate-100 hidden">
-              <table class="w-full text-left border-collapse">
-                <thead>
-                  <tr class="border-b border-slate-200 text-slate-500 font-bold">
-                    <th class="pb-1">Jenis Paspor / Layanan</th>
-                    <th class="pb-1 text-right">Tarif</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 text-slate-700">
-                  <tr>
-                    <td class="py-1.5 font-medium">Paspor Elektronik Masa Berlaku 5 Tahun</td>
-                    <td class="py-1.5 text-right font-bold text-brand-navy">Rp 650.000</td>
-                  </tr>
-                  <tr>
-                    <td class="py-1.5 font-medium">Paspor Elektronik Masa Berlaku 10 Tahun</td>
-                    <td class="py-1.5 text-right font-bold text-brand-navy">Rp 950.000</td>
-                  </tr>
-                  <tr>
-                    <td class="py-1.5 text-slate-500">Layanan Percepatan Paspor (Selesai Hari Sama)</td>
-                    <td class="py-1.5 text-right text-slate-600">Rp 1.000.000</td>
-                  </tr>
-                  <tr>
-                    <td class="py-1.5 text-slate-500">Denda Paspor Hilang</td>
-                    <td class="py-1.5 text-right text-red-600 font-semibold">Rp 1.000.000</td>
-                  </tr>
-                  <tr>
-                    <td class="py-1.5 text-slate-500">Denda Paspor Rusak</td>
-                    <td class="py-1.5 text-right text-amber-600 font-semibold">Rp 500.000</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- 3. LAYANAN INFORMASI & PENGADUAN WA PAGE -->
-        <div id="page-pengaduan" class="p-4 space-y-3 hidden">
-          <div class="flex items-center justify-between border-b pb-2">
-            <h3 class="text-sm font-bold text-brand-navy flex items-center">
-              <i class="fa-brands fa-whatsapp text-emerald-600 text-lg mr-2"></i> Layanan Informasi & Pengaduan
-            </h3>
-            <button onclick="showPage('home')" class="text-xs text-slate-500 hover:text-brand-navy">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <p class="text-xs text-slate-600">Pilih kategori pengaduan di bawah ini untuk terhubung langsung dengan Tim Pengaduan Kantor Imigrasi Kelas I Non TPI Agam:</p>
-
-          <!-- Category Cards -->
-          <div class="space-y-2">
-            
-            <div onclick="selectCategory('Pelayanan Paspor')" id="cat-paspor" class="p-3 rounded-xl border-2 border-brand-blue bg-blue-50/50 cursor-pointer transition flex items-center justify-between">
-              <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center text-xs">
-                  <i class="fa-solid fa-passport"></i>
-                </div>
-                <div>
-                  <h4 class="text-xs font-bold text-slate-800">Pelayanan Paspor</h4>
-                  <p class="text-[10px] text-slate-500">Permohonan, proses, atau kendala antrean paspor</p>
-                </div>
-              </div>
-              <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-            </div>
-
-            <div onclick="selectCategory('Izin Tinggal WNA')" id="cat-izin" class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:border-brand-blue cursor-pointer transition flex items-center justify-between">
-              <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs">
-                  <i class="fa-solid fa-id-card"></i>
-                </div>
-                <div>
-                  <h4 class="text-xs font-bold text-slate-800">Izin Tinggal & Visa</h4>
-                  <p class="text-[10px] text-slate-500">Izin tinggal kunjungan, ITAS, ITAP atau WNA</p>
-                </div>
-              </div>
-              <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-            </div>
-
-            <div onclick="selectCategory('Pengawasan & Inteldak')" id="cat-inteldak" class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:border-brand-blue cursor-pointer transition flex items-center justify-between">
-              <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs">
-                  <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <div>
-                  <h4 class="text-xs font-bold text-slate-800">Inteldak & Pengawasan</h4>
-                  <p class="text-[10px] text-slate-500">Laporan pelanggaran/keberadaan Orang Asing</p>
-                </div>
-              </div>
-              <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-            </div>
-
-          </div>
-
-          <!-- Dynamic Complaint Draft Text Area -->
-          <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm space-y-2 mt-3">
-            <label class="block text-xs font-bold text-slate-700">
-              Kategori Terpilih: <span id="selected-cat-title" class="text-brand-blue">Pelayanan Paspor</span>
-            </label>
-            
-            <textarea id="input-pesan" oninput="updateWAPreview()" rows="3" placeholder="Ketik rincian informasi/pengaduan Anda di sini..." class="w-full text-xs p-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-blue"></textarea>
-
-            <div class="bg-slate-100 p-2 rounded-lg border border-slate-200">
-              <span class="text-[10px] text-slate-500 font-bold block mb-1">Preview Draf Pesan WhatsApp:</span>
-              <p id="wa-preview-text" class="text-[11px] text-slate-700 italic font-mono whitespace-pre-wrap">Halo, saya ingin menyampaikan informasi/pengaduan terkait *Pelayanan Paspor*.</p>
-            </div>
-
-            <button onclick="sendToWhatsApp()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg shadow-md flex items-center justify-center transition">
-              <i class="fa-brands fa-whatsapp text-base mr-2"></i> Kirim Langsung ke WhatsApp
-            </button>
-          </div>
-        </div>
-
-        <!-- 4. M-PASPOR PAGE -->
-        <div id="page-mpaspor" class="p-4 space-y-3 hidden">
-          <div class="flex items-center justify-between border-b pb-2">
-            <h3 class="text-sm font-bold text-brand-navy flex items-center">
-              <i class="fa-solid fa-mobile-retro text-purple-600 mr-2"></i> Aplikasi M-Paspor
-            </h3>
-            <button onclick="showPage('home')" class="text-xs text-slate-500 hover:text-brand-navy">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <div class="bg-purple-50 border border-purple-200 p-3 rounded-xl text-xs space-y-1">
-            <h4 class="font-bold text-purple-900">Apa itu M-Paspor?</h4>
-            <p class="text-purple-800 leading-relaxed">Aplikasi resmi Direktorat Jenderal Imigrasi untuk mengajukan permohonan paspor secara online, mengunggah berkas, serta memilih jadwal kedatangan di Kantor Imigrasi Agam.</p>
-          </div>
-
-          <!-- Download App Buttons -->
-          <div class="grid grid-cols-2 gap-2">
-            <a href="https://play.google.com/store/apps/details?id=id.go.imigrasi.paspor_online" target="_blank" class="flex items-center justify-center bg-slate-900 text-white p-2.5 rounded-xl text-xs hover:bg-black transition">
-              <i class="fa-brands fa-google-play text-lg mr-2 text-emerald-400"></i>
-              <div class="text-left">
-                <span class="text-[9px] block text-slate-400">Unduh di</span>
-                <span class="font-bold text-[10px]">Google Play</span>
-              </div>
-            </a>
-            <a href="https://apps.apple.com/id/app/m-paspor/id1582231268" target="_blank" class="flex items-center justify-center bg-slate-900 text-white p-2.5 rounded-xl text-xs hover:bg-black transition">
-              <i class="fa-brands fa-apple text-xl mr-2 text-slate-200"></i>
-              <div class="text-left">
-                <span class="text-[9px] block text-slate-400">Unduh di</span>
-                <span class="font-bold text-[10px]">App Store</span>
-              </div>
-            </a>
-          </div>
-
-          <!-- Step Guide -->
-          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-2 text-xs">
-            <h4 class="font-bold text-slate-800">Tata Cara Pendaftaran M-Paspor:</h4>
-            <ol class="list-decimal list-inside space-y-1.5 text-slate-600">
-              <li>Unduh & registrasi akun di aplikasi M-Paspor.</li>
-              <li>Pilih lokasi **Kantor Imigrasi Agam**.</li>
-              <li>Pilih jenis paspor dan isi data diri sesuai KTP.</li>
-              <li>Unggah foto dokumen persyaratan (KTP, KK, Akta).</li>
-              <li>Lakukan pembayaran PNBP via Bank/Kode Billing.</li>
-              <li>Datang ke Kantor Imigrasi Agam sesuai jadwal untuk wawancara & foto.</li>
-            </ol>
-          </div>
-        </div>
-
-        <!-- 5. VISA & IZIN TINGGAL PAGE -->
-        <div id="page-izin" class="p-4 space-y-3 hidden">
-          <div class="flex items-center justify-between border-b pb-2">
-            <h3 class="text-sm font-bold text-brand-navy flex items-center">
-              <i class="fa-solid fa-id-card text-amber-500 mr-2"></i> Visa & Izin Tinggal Keimigrasian
-            </h3>
-            <button onclick="showPage('home')" class="text-xs text-slate-500 hover:text-brand-navy">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <!-- Banner eVisa Official -->
-          <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-3 rounded-xl shadow-sm space-y-2">
-            <div class="flex items-center space-x-2">
-              <i class="fa-solid fa-globe text-brand-gold text-base"></i>
-              <h4 class="font-bold text-xs">Portal Resmi eVisa Indonesia</h4>
-            </div>
-            <p class="text-[11px] text-slate-200">Pengajuan dan Perpanjangan Izin Tinggal WNA kini dapat dilakukan secara daring melalui portal resmi Direktorat Jenderal Imigrasi.</p>
-            <a href="https://evisa.imigrasi.go.id/" target="_blank" class="block bg-slate-800/80 hover:bg-slate-800 text-white text-xs py-2 px-3 rounded-lg text-center font-medium border border-slate-700 transition">
-              <i class="fa-solid fa-external-link mr-1"></i> Buka Portal evisa.imigrasi.go.id
-            </a>
-          </div>
-
-          <!-- Tabs Navigation -->
-          <div class="flex border-b border-slate-200 mb-3 bg-slate-100 p-1 rounded-lg">
-            <button onclick="switchIzinTab('itk')" id="tab-itk" class="flex-1 py-1.5 text-xs font-bold rounded-md bg-white text-brand-navy shadow-sm transition">ITK (Kunjungan)</button>
-            <button onclick="switchIzinTab('itas')" id="tab-itas" class="flex-1 py-1.5 text-xs font-semibold text-slate-500 hover:text-slate-800 transition">ITAS (Terbatas)</button>
-            <button onclick="switchIzinTab('itap')" id="tab-itap" class="flex-1 py-1.5 text-xs font-semibold text-slate-500 hover:text-slate-800 transition">ITAP (Tetap)</button>
-          </div>
-
-          <!-- Content ITK -->
-          <div id="content-itk" class="space-y-3">
-            <div class="bg-blue-50/50 p-2.5 rounded-lg border border-blue-100 text-xs">
-              <h4 class="font-bold text-brand-navy mb-1"><i class="fa-solid fa-plane-arrival mr-1"></i> Izin Tinggal Kunjungan (ITK)</h4>
-              <p class="text-slate-600 mb-2">Diberikan kepada Orang Asing yang tinggal di Indonesia untuk jangka waktu singkat dalam rangka kunjungan wisata, bisnis, atau tugas pemerintahan.</p>
-              <span class="font-semibold text-slate-700 block mb-1">Persyaratan Perpanjangan:</span>
-              <ul class="list-disc list-inside text-slate-600 space-y-1">
-                <li>Paspor Kebangsaan yang sah dan masih berlaku</li>
-                <li>Tiket kembali atau tiket terusan untuk melanjutkan perjalanan</li>
-                <li>Surat penjaminan dari Penjamin (kecuali kunjungan wisata)</li>
-                <li>KTP Penjamin / Sponsor</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Content ITAS -->
-          <div id="content-itas" class="space-y-3 hidden">
-            <div class="bg-amber-50/50 p-2.5 rounded-lg border border-amber-100 text-xs">
-              <h4 class="font-bold text-brand-navy mb-1"><i class="fa-solid fa-id-card-clip mr-1"></i> Izin Tinggal Terbatas (ITAS)</h4>
-              <p class="text-slate-600 mb-2">Diberikan kepada Orang Asing untuk tinggal jangka menengah (bekerja, investasi, penyatuan keluarga, belajar).</p>
-              <span class="font-semibold text-slate-700 block mb-1">Persyaratan Perpanjangan:</span>
-              <ul class="list-disc list-inside text-slate-600 space-y-1">
-                <li>Paspor asli dan fotokopi yang masih berlaku</li>
-                <li>Surat Permohonan & Penjaminan dari Sponsor</li>
-                <li>KTP Penjamin / WNI</li>
-                <li>KARTU ITAS (E-ITAS) aktif</li>
-                <li>RPTKA / Rekomendasi Instansi Terkait (untuk tenaga kerja)</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Content ITAP -->
-          <div id="content-itap" class="space-y-3 hidden">
-            <div class="bg-emerald-50/50 p-2.5 rounded-lg border border-emerald-100 text-xs">
-              <h4 class="font-bold text-brand-navy mb-1"><i class="fa-solid fa-house-user mr-1"></i> Izin Tinggal Tetap (ITAP)</h4>
-              <p class="text-slate-600 mb-2">Diberikan kepada Orang Asing tertentu untuk bertempat tinggal dan menetap di wilayah Indonesia sebagai penduduk.</p>
-              <span class="font-semibold text-slate-700 block mb-1">Persyaratan Perpanjangan:</span>
-              <ul class="list-disc list-inside text-slate-600 space-y-1">
-                <li>Paspor asli dan fotokopi</li>
-                <li>Kartu ITAP lama</li>
-                <li>Surat Permohonan & Integrasi</li>
-                <li>KTP Penjamin WNI / Dokumen PerkawinanCampuran / Investasi</li>
-                <li>Keterangan Domisili dari Dinas Kependudukan</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. STATISTIK & REKAP PENGADUAN PAGE -->
-        <div id="page-statistik" class="p-4 space-y-4 hidden">
-          <div class="flex items-center justify-between border-b pb-2">
-            <h3 class="text-sm font-bold text-brand-navy flex items-center">
-              <i class="fa-solid fa-chart-pie text-brand-gold mr-2"></i> Rekapitulasi & Grafik Pengaduan
-            </h3>
-            <button onclick="showPage('home')" class="text-xs text-slate-500 hover:text-brand-navy">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <!-- Quick Stats Cards -->
-          <div class="grid grid-cols-3 gap-2">
-            <div class="bg-blue-50 border border-blue-200 p-2.5 rounded-xl text-center">
-              <span class="text-[10px] uppercase tracking-wider text-blue-600 font-bold block">Total</span>
-              <span class="text-lg font-bold text-brand-navy">128</span>
-            </div>
-            <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-center">
-              <span class="text-[10px] uppercase tracking-wider text-emerald-600 font-bold block">Selesai</span>
-              <span class="text-lg font-bold text-emerald-700">118</span>
-            </div>
-            <div class="bg-amber-50 border border-amber-200 p-2.5 rounded-xl text-center">
-              <span class="text-[10px] uppercase tracking-wider text-amber-600 font-bold block">Proses</span>
-              <span class="text-lg font-bold text-amber-700">10</span>
-            </div>
-          </div>
-
-          <!-- Mini Chart Visual -->
-          <div class="bg-white border border-slate-200 p-3 rounded-xl space-y-2">
-            <h4 class="text-xs font-semibold text-slate-700">Kategori Pengaduan Terbanyak</h4>
-            
-            <div class="space-y-1.5 text-xs">
-              <div>
-                <div class="flex justify-between text-[11px] mb-0.5">
-                  <span class="text-slate-600">Pelayanan Paspor</span>
-                  <span class="font-bold text-slate-700">65% (83)</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2">
-                  <div class="bg-blue-600 h-2 rounded-full" style="width: 65%"></div>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between text-[11px] mb-0.5">
-                  <span class="text-slate-600">Izin Tinggal WNA</span>
-                  <span class="font-bold text-slate-700">20% (25)</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2">
-                  <div class="bg-emerald-500 h-2 rounded-full" style="width: 20%"></div>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between text-[11px] mb-0.5">
-                  <span class="text-slate-600">Pengawasan / Inteldak</span>
-                  <span class="font-bold text-slate-700">15% (20)</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2">
-                  <div class="bg-amber-500 h-2 rounded-full" style="width: 15%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Table Rekap Pengaduan dengan Pencarian -->
-          <div class="bg-white border border-slate-200 p-3 rounded-xl space-y-2">
-            <div class="flex items-center justify-between">
-              <h4 class="text-xs font-semibold text-slate-700">Data Rekap Laporan</h4>
-              <button onclick="downloadCSVReport()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold py-1 px-2.5 rounded-md flex items-center transition">
-                <i class="fa-solid fa-file-csv mr-1"></i> Unduh Laporan (CSV)
-              </button>
-            </div>
-
-            <!-- Search Bar Input -->
-            <div class="relative">
-              <input type="text" id="search-pengaduan-input" onkeyup="filterPengaduanTable()" placeholder="Cari berdasarkan Nama atau No. Pengadu..." class="w-full pl-7 pr-3 py-1.5 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-blue">
-              <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
-            </div>
-
-            <div class="overflow-x-auto max-h-48 custom-scroll">
-              <table id="table-rekap-pengaduan" class="w-full text-left border-collapse text-[11px]">
-                <thead>
-                  <tr class="bg-slate-100 text-slate-600 border-b border-slate-200">
-                    <th class="p-1.5 font-bold">No. / Nama</th>
-                    <th class="p-1.5 font-bold">Kategori</th>
-                    <th class="p-1.5 font-bold text-center">Status</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 text-slate-700">
-                  <tr class="pengaduan-row">
-                    <td class="p-1.5 font-medium">
-                      #AGM-1024<br><span class="text-slate-500 text-[10px]">Rahmat Hidayat</span>
-                    </td>
-                    <td class="p-1.5">Paspor Hilang</td>
-                    <td class="p-1.5 text-center"><span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded text-[9px] font-bold">Selesai</span></td>
-                  </tr>
-                  <tr class="pengaduan-row">
-                    <td class="p-1.5 font-medium">
-                      #AGM-1025<br><span class="text-slate-500 text-[10px]">Siti Aminah</span>
-                    </td>
-                    <td class="p-1.5">M-Paspor Error</td>
-                    <td class="p-1.5 text-center"><span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded text-[9px] font-bold">Selesai</span></td>
-                  </tr>
-                  <tr class="pengaduan-row">
-                    <td class="p-1.5 font-medium">
-                      #AGM-1026<br><span class="text-slate-500 text-[10px]">Ahmad Fauzi</span>
-                    </td>
-                    <td class="p-1.5">Perpanjang ITAS</td>
-                    <td class="p-1.5 text-center"><span class="bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded text-[9px] font-bold">Diproses</span></td>
-                  </tr>
-                  <tr class="pengaduan-row">
-                    <td class="p-1.5 font-medium">
-                      #AGM-1027<br><span class="text-slate-500 text-[10px]">Budi Santoso</span>
-                    </td>
-                    <td class="p-1.5">Pengawasan WNA</td>
-                    <td class="p-1.5 text-center"><span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded text-[9px] font-bold">Selesai</span></td>
-                  </tr>
-                  <tr class="pengaduan-row">
-                    <td class="p-1.5 font-medium">
-                      #AGM-1028<br><span class="text-slate-500 text-[10px]">Dewi Maharani</span>
-                    </td>
-                    <td class="p-1.5">Tarif PNBP</td>
-                    <td class="p-1.5 text-center"><span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded text-[9px] font-bold">Selesai</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- 7. MEDIA SOSIAL PAGE -->
-        <div id="page-sosmed" class="p-4 space-y-4 hidden">
-          <div class="flex items-center justify-between border-b pb-2">
-            <h3 class="text-sm font-bold text-brand-navy flex items-center">
-              <i class="fa-solid fa-hashtag text-brand-gold mr-2"></i> Media Sosial & Konten
-            </h3>
-            <button onclick="showPage('home')" class="text-xs text-slate-500 hover:text-brand-navy">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <p class="text-xs text-slate-600">Ikuti akun resmi Kantor Imigrasi Kelas I Non TPI Agam untuk berita, kabar terkini, dan info layanan publik:</p>
-
-          <div class="grid grid-cols-2 gap-3">
-            <a href="https://www.instagram.com/kanim.agam/" target="_blank" class="flex items-center p-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl shadow-sm hover:opacity-90 transition">
-              <i class="fa-brands fa-instagram text-2xl mr-3"></i>
-              <div>
-                <span class="text-xs font-bold block">Instagram</span>
-                <span class="text-[10px] text-pink-100">@kanim.agam</span>
-              </div>
-            </a>
-
-            <a href="https://www.tiktok.com/@imigrasi.agam" target="_blank" class="flex items-center p-3 bg-slate-900 text-white rounded-xl shadow-sm hover:bg-black transition">
-              <i class="fa-brands fa-tiktok text-2xl mr-3"></i>
-              <div>
-                <span class="text-xs font-bold block">TikTok</span>
-                <span class="text-[10px] text-slate-300">@imigrasi.agam</span>
-              </div>
-            </a>
-
-            <a href="https://www.facebook.com/imigrasi.agam/" target="_blank" class="flex items-center p-3 bg-blue-600 text-white rounded-xl shadow-sm hover:bg-blue-700 transition">
-              <i class="fa-brands fa-facebook text-2xl mr-3"></i>
-              <div>
-                <span class="text-xs font-bold block">Facebook</span>
-                <span class="text-[10px] text-blue-100">Imigrasi Agam</span>
-              </div>
-            </a>
-
-            <a href="https://twitter.com/imigrasi_agam" target="_blank" class="flex items-center p-3 bg-sky-500 text-white rounded-xl shadow-sm hover:bg-sky-600 transition">
-              <i class="fa-brands fa-x-twitter text-2xl mr-3"></i>
-              <div>
-                <span class="text-xs font-bold block">X / Twitter</span>
-                <span class="text-[10px] text-sky-100">@imigrasi_agam</span>
-              </div>
-            </a>
-
-            <a href="https://www.youtube.com/@kantorimigrasikelasinontpiaga" target="_blank" class="col-span-2 flex items-center p-3 bg-red-600 text-white rounded-xl shadow-sm hover:bg-red-700 transition">
-              <i class="fa-brands fa-youtube text-2xl mr-3"></i>
-              <div>
-                <span class="text-xs font-bold block">YouTube Official</span>
-                <span class="text-[10px] text-red-100">Kantor Imigrasi Kelas I Non TPI Agam</span>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- 8. TENTANG APLIKASI PAGE -->
-        <div id="page-tentang" class="p-4 space-y-4 hidden">
-          <div class="flex items-center justify-between border-b pb-2">
-            <h3 class="text-sm font-bold text-brand-navy flex items-center">
-              <i class="fa-solid fa-circle-info text-brand-gold mr-2"></i> Tentang Aplikasi SIAGA
-            </h3>
-            <button onclick="showPage('home')" class="text-xs text-slate-500 hover:text-brand-navy">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <div class="text-center space-y-2 py-2">
-            <div class="w-20 h-20 bg-white p-2 rounded-full flex items-center justify-center mx-auto border-2 border-brand-gold shadow-md">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Logo_Imigrasi_Indonesia.png/600px-Logo_Imigrasi_Indonesia.png" alt="Logo Imigrasi" class="w-full h-full object-contain">
-            </div>
-            <h4 class="font-bold text-sm text-brand-navy">SIAGA Imigrasi Agam</h4>
-            <p class="text-xs text-slate-500">Sistem Informasi & Pengaduan Masyarakat Digital Terpadu</p>
-          </div>
-
-          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs space-y-2 text-slate-600">
-            <p>Aplikasi **SIAGA** dirancang khusus untuk mempermudah masyarakat di wilayah kerja Kantor Imigrasi Kelas I Non TPI Agam dalam mengakses informasi keimigrasian serta menyampaikan pengaduan atau saran secara cepat dan transparan.</p>
-            <p><strong>Alamat Kantor:</strong><br>Jl. Raya Bukittinggi - Payakumbuh Km. 9, Koto Hilir, Kab. Agam, Sumatera Barat.</p>
-            <p><strong>Layanan Pengaduan WhatsApp Resmi:</strong><br><span class="font-bold text-brand-blue">085274656300</span></p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Bottom Navigation Bar -->
-      <div id="bottom-nav" class="bg-white border-t border-slate-200 px-4 py-2 flex justify-around items-center rounded-b-[38px] transition-all">
-        <button onclick="showPage('home')" id="nav-home" class="flex flex-col items-center text-brand-navy">
-          <i class="fa-solid fa-house text-base"></i>
-          <span class="text-[10px] font-semibold mt-0.5">Beranda</span>
-        </button>
-        <button onclick="showPage('info')" id="nav-info" class="flex flex-col items-center text-slate-400 hover:text-brand-navy">
-          <i class="fa-solid fa-file-lines text-base"></i>
-          <span class="text-[10px] font-semibold mt-0.5">Layanan</span>
-        </button>
-        <button onclick="showPage('pengaduan')" id="nav-pengaduan" class="flex flex-col items-center text-slate-400 hover:text-brand-navy">
-          <i class="fa-brands fa-whatsapp text-base"></i>
-          <span class="text-[10px] font-semibold mt-0.5">Pengaduan</span>
-        </button>
-        <button onclick="showPage('tentang')" id="nav-tentang" class="flex flex-col items-center text-slate-400 hover:text-brand-navy">
-          <i class="fa-solid fa-user-gear text-base"></i>
-          <span class="text-[10px] font-semibold mt-0.5">Tentang</span>
-        </button>
-      </div>
-
+      <button onclick="showPage('pengaduan')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-2 rounded-lg flex items-center shadow-sm transition">
+        <i class="fa-brands fa-whatsapp text-sm mr-1.5"></i> Hubungi WA
+      </button>
     </div>
-  </div>
+  </header>
 
-  <!-- JavaScript App Logic -->
+  <!-- HERO BANNER -->
+  <section class="minang-pattern text-white py-8 px-4 shadow-inner">
+    <div class="max-w-6xl mx-auto text-center md:text-left md:flex md:items-center md:justify-between">
+      <div>
+        <span class="inline-block px-3 py-1 bg-brand-gold/20 text-brand-gold text-xs font-bold rounded-full mb-2 border border-brand-gold/30">Layanan Publik Digital Terpadu</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-wide">Sistem Informasi & Pengaduan Masyarakat</h2>
+        <p class="text-xs md:text-sm text-slate-300 mt-1 max-w-2xl">Akses syarat paspor, pendaftaran M-Paspor, izin tinggal WNA, hingga pengaduan WhatsApp langsung ke Kantor Imigrasi Agam.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-6xl mx-auto w-full px-4 py-6 flex-1">
+
+    <!-- 1. BERANDA / HOME PAGE -->
+    <div id="page-home" class="space-y-6">
+      <!-- Announcement Bar -->
+      <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm flex items-center space-x-3 text-xs md:text-sm text-amber-900">
+        <i class="fa-solid fa-bullhorn text-amber-600 text-base"></i>
+        <p class="font-medium">Selamat datang di Portal SIAGA Imigrasi Agam. Gunakan menu di bawah untuk informasi dan pengaduan langsung.</p>
+      </div>
+
+      <!-- Main Services Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        
+        <!-- Card 1: Informasi Paspor -->
+        <div onclick="showPage('info')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-brand-gold transition cursor-pointer group">
+          <div class="w-12 h-12 rounded-xl bg-blue-100 text-brand-blue flex items-center justify-center mb-3 group-hover:scale-110 transition">
+            <i class="fa-solid fa-passport text-2xl"></i>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-slate-800">Informasi Layanan Paspor</h3>
+          <p class="text-xs text-slate-500 mt-1">Syarat Paspor Baru, Anak, Penggantian, Hilang, Rusak & Tarif PNBP.</p>
+        </div>
+
+        <!-- Card 2: Pengaduan WA -->
+        <div onclick="showPage('pengaduan')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-brand-gold transition cursor-pointer group">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-slate-800">Layanan Informasi & Pengaduan</h3>
+          <p class="text-xs text-slate-500 mt-1">Kirim pesan pengaduan resmi via WhatsApp 085274656300.</p>
+        </div>
+
+        <!-- Card 3: M-Paspor -->
+        <div onclick="showPage('mpaspor')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-brand-gold transition cursor-pointer group">
+          <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+            <i class="fa-solid fa-mobile-retro text-2xl"></i>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-slate-800">Aplikasi M-Paspor</h3>
+          <p class="text-xs text-slate-500 mt-1">Panduan langkah pendaftaran dan tautan unduh Play Store / App Store.</p>
+        </div>
+
+        <!-- Card 4: Visa & Izin Tinggal -->
+        <div onclick="showPage('izin')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-brand-gold transition cursor-pointer group">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+            <i class="fa-solid fa-id-card text-2xl"></i>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-slate-800">Visa & Izin Tinggal</h3>
+          <p class="text-xs text-slate-500 mt-1">Prosedur perpanjangan ITK, ITAS, ITAP & Portal eVisa Indonesia.</p>
+        </div>
+
+        <!-- Card 5: Media Sosial -->
+        <div onclick="showPage('sosmed')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-brand-gold transition cursor-pointer group">
+          <div class="w-12 h-12 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+            <i class="fa-solid fa-hashtag text-2xl"></i>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-slate-800">Media Sosial Official</h3>
+          <p class="text-xs text-slate-500 mt-1">Akses cepat ke Instagram, TikTok, Facebook, Twitter, dan YouTube.</p>
+        </div>
+
+        <!-- Card 6: Statistik Pengaduan -->
+        <div onclick="showPage('statistik')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-brand-gold transition cursor-pointer group">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+            <i class="fa-solid fa-chart-column text-2xl"></i>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-slate-800">Statistik Pengaduan</h3>
+          <p class="text-xs text-slate-500 mt-1">Rekapitulasi laporan, pencarian realtime, dan ekspor berkas CSV.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2. INFORMASI LAYANAN PASPOR PAGE -->
+    <div id="page-info" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 hidden">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="text-base md:text-lg font-bold text-brand-navy flex items-center">
+          <i class="fa-solid fa-passport text-brand-gold mr-2"></i> Information Persyaratan & Tarif Paspor RI
+        </h3>
+        <button onclick="showPage('home')" class="text-xs text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Quick Tab Pills -->
+      <div class="flex overflow-x-auto space-x-2 py-1 custom-scroll text-xs">
+        <button onclick="filterPaspor('baru')" id="tab-paspor-baru" class="px-4 py-2 font-bold rounded-lg bg-brand-navy text-white shadow-sm transition">Paspor Baru</button>
+        <button onclick="filterPaspor('anak')" id="tab-paspor-anak" class="px-4 py-2 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Paspor Anak</button>
+        <button onclick="filterPaspor('penggantian')" id="tab-paspor-penggantian" class="px-4 py-2 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Penggantian</button>
+        <button onclick="filterPaspor('hilang')" id="tab-paspor-hilang" class="px-4 py-2 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Paspor Hilang</button>
+        <button onclick="filterPaspor('rusak')" id="tab-paspor-rusak" class="px-4 py-2 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Paspor Rusak</button>
+        <button onclick="filterPaspor('tarif')" id="tab-paspor-tarif" class="px-4 py-2 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Tarif PNBP</button>
+      </div>
+
+      <!-- Content Accordions -->
+      <div class="space-y-3 pt-2">
+        
+        <div class="border border-slate-200 rounded-xl overflow-hidden">
+          <button onclick="toggleAccordion('baru')" class="w-full p-4 text-left font-bold text-xs md:text-sm text-brand-navy flex justify-between items-center bg-slate-50">
+            <span><i class="fa-solid fa-user-check text-brand-gold mr-2"></i> Persyaratan Paspor Baru (Dewasa)</span>
+            <i id="icon-baru" class="fa-solid fa-chevron-up text-brand-blue"></i>
+          </button>
+          <div id="acc-baru" class="p-4 text-xs md:text-sm space-y-2 border-t border-slate-100">
+            <ul class="list-disc list-inside text-slate-600 space-y-1">
+              <li><strong>e-KTP</strong> (Kartu Tanda Penduduk) asli & fotokopi.</li>
+              <li><strong>Kartu Keluarga (KK)</strong> asli & fotokopi.</li>
+              <li><strong>Akta Kelahiran / Akta Nikah / Ijazah / Surat Baptis</strong> (memuat nama, tempat tanggal lahir, serta nama orang tua).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl overflow-hidden">
+          <button onclick="toggleAccordion('anak')" class="w-full p-4 text-left font-bold text-xs md:text-sm text-brand-navy flex justify-between items-center bg-slate-50">
+            <span><i class="fa-solid fa-child text-brand-gold mr-2"></i> Persyaratan Paspor Anak (Di Bawah 17 Tahun)</span>
+            <i id="icon-anak" class="fa-solid fa-chevron-down text-slate-400"></i>
+          </button>
+          <div id="acc-anak" class="p-4 text-xs md:text-sm space-y-2 border-t border-slate-100 hidden">
+            <ul class="list-disc list-inside text-slate-600 space-y-1">
+              <li><strong>e-KTP Kedua Orang Tua</strong> (Asli & Fotokopi).</li>
+              <li><strong>Kartu Keluarga (KK)</strong> memuat nama anak.</li>
+              <li><strong>Akta Kelahiran Anak</strong> / Surat Kenal Lahir.</li>
+              <li><strong>Buku Nikah / Akta Perkawinan</strong> Orang Tua.</li>
+              <li><strong>Surat Pernyataan Orang Tua</strong> (bermaterai 10.000).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl overflow-hidden">
+          <button onclick="toggleAccordion('penggantian')" class="w-full p-4 text-left font-bold text-xs md:text-sm text-brand-navy flex justify-between items-center bg-slate-50">
+            <span><i class="fa-solid fa-rotate text-brand-gold mr-2"></i> Paspor Penggantian (Habis Masa Berlaku)</span>
+            <i id="icon-penggantian" class="fa-solid fa-chevron-down text-slate-400"></i>
+          </button>
+          <div id="acc-penggantian" class="p-4 text-xs md:text-sm space-y-2 border-t border-slate-100 hidden">
+            <ul class="list-disc list-inside text-slate-600 space-y-1">
+              <li><strong>e-KTP Asli</strong> & Fotokopi.</li>
+              <li><strong>Paspor Lama Asli</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl overflow-hidden">
+          <button onclick="toggleAccordion('hilang')" class="w-full p-4 text-left font-bold text-xs md:text-sm text-brand-navy flex justify-between items-center bg-slate-50">
+            <span><i class="fa-solid fa-triangle-exclamation text-amber-500 mr-2"></i> Paspor Hilang</span>
+            <i id="icon-hilang" class="fa-solid fa-chevron-down text-slate-400"></i>
+          </button>
+          <div id="acc-hilang" class="p-4 text-xs md:text-sm space-y-2 border-t border-slate-100 hidden">
+            <ul class="list-disc list-inside text-slate-600 space-y-1">
+              <li><strong>Surat Laporan Kehilangan</strong> dari Kepolisian.</li>
+              <li><strong>e-KTP & KK Asli</strong>.</li>
+              <li><strong>Akta Lahir / Ijazah / Buku Nikah</strong>.</li>
+              <li>Pemeriksaan BAP oleh Seksi Inteldak Imigrasi Agam.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl overflow-hidden">
+          <button onclick="toggleAccordion('rusak')" class="w-full p-4 text-left font-bold text-xs md:text-sm text-brand-navy flex justify-between items-center bg-slate-50">
+            <span><i class="fa-solid fa-heart-crack text-red-500 mr-2"></i> Paspor Rusak</span>
+            <i id="icon-rusak" class="fa-solid fa-chevron-down text-slate-400"></i>
+          </button>
+          <div id="acc-rusak" class="p-4 text-xs md:text-sm space-y-2 border-t border-slate-100 hidden">
+            <ul class="list-disc list-inside text-slate-600 space-y-1">
+              <li><strong>Fisik Paspor Rusak</strong>.</li>
+              <li><strong>e-KTP & Kartu Keluarga (KK)</strong>.</li>
+              <li>Proses wawancara Berita Acara Pemeriksaan (BAP).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl overflow-hidden">
+          <button onclick="toggleAccordion('tarif')" class="w-full p-4 text-left font-bold text-xs md:text-sm text-brand-navy flex justify-between items-center bg-slate-50">
+            <span><i class="fa-solid fa-money-bill-wave text-emerald-600 mr-2"></i> Tarif Resmi PNBP Paspor</span>
+            <i id="icon-tarif" class="fa-solid fa-chevron-down text-slate-400"></i>
+          </button>
+          <div id="acc-tarif" class="p-4 text-xs md:text-sm border-t border-slate-100 hidden">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-slate-200 text-slate-500 font-bold">
+                  <th class="pb-2">Jenis Paspor / Layanan</th>
+                  <th class="pb-2 text-right">Tarif</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                <tr>
+                  <td class="py-2 font-medium">Paspor Elektronik Masa Berlaku 5 Tahun</td>
+                  <td class="py-2 text-right font-bold text-brand-navy">Rp 650.000</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Paspor Elektronik Masa Berlaku 10 Tahun</td>
+                  <td class="py-2 text-right font-bold text-brand-navy">Rp 950.000</td>
+                </tr>
+                <tr>
+                  <td class="py-2 text-slate-500">Layanan Percepatan Paspor (Selesai Hari Sama)</td>
+                  <td class="py-2 text-right text-slate-600">Rp 1.000.000</td>
+                </tr>
+                <tr>
+                  <td class="py-2 text-slate-500">Denda Paspor Hilang</td>
+                  <td class="py-2 text-right text-red-600 font-semibold">Rp 1.000.000</td>
+                </tr>
+                <tr>
+                  <td class="py-2 text-slate-500">Denda Paspor Rusak</td>
+                  <td class="py-2 text-right text-amber-600 font-semibold">Rp 500.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3. LAYANAN INFORMASI & PENGADUAN WA PAGE -->
+    <div id="page-pengaduan" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 hidden">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="text-base md:text-lg font-bold text-brand-navy flex items-center">
+          <i class="fa-brands fa-whatsapp text-emerald-600 text-xl mr-2"></i> Layanan Informasi & Pengaduan
+        </h3>
+        <button onclick="showPage('home')" class="text-xs text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <p class="text-xs md:text-sm text-slate-600">Pilih kategori layanan/pengaduan di bawah ini untuk terhubung langsung ke WhatsApp Kantor Imigrasi Agam:</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div onclick="selectCategory('Pelayanan Paspor')" id="cat-paspor" class="p-4 rounded-xl border-2 border-brand-blue bg-blue-50/50 cursor-pointer transition flex items-center justify-between">
+          <div>
+            <h4 class="text-xs md:text-sm font-bold text-slate-800">Pelayanan Paspor</h4>
+            <p class="text-[11px] text-slate-500">Informasi permohonan & status paspor</p>
+          </div>
+          <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+        </div>
+
+        <div onclick="selectCategory('Izin Tinggal WNA')" id="cat-izin" class="p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-brand-blue cursor-pointer transition flex items-center justify-between">
+          <div>
+            <h4 class="text-xs md:text-sm font-bold text-slate-800">Izin Tinggal & Visa</h4>
+            <p class="text-[11px] text-slate-500">ITK, ITAS, ITAP & Visa WNA</p>
+          </div>
+          <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+        </div>
+
+        <div onclick="selectCategory('Pengawasan & Inteldak')" id="cat-inteldak" class="p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-brand-blue cursor-pointer transition flex items-center justify-between">
+          <div>
+            <h4 class="text-xs md:text-sm font-bold text-slate-800">Inteldak & Pengawasan</h4>
+            <p class="text-[11px] text-slate-500">Laporan keberadaan Orang Asing</p>
+          </div>
+          <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+        </div>
+      </div>
+
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+        <label class="block text-xs md:text-sm font-bold text-slate-700">
+          Kategori Terpilih: <span id="selected-cat-title" class="text-brand-blue">Pelayanan Paspor</span>
+        </label>
+        
+        <textarea id="input-pesan" oninput="updateWAPreview()" rows="3" placeholder="Ketik rincian informasi atau pengaduan Anda di sini..." class="w-full text-xs md:text-sm p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-blue"></textarea>
+
+        <div class="bg-white p-3 rounded-lg border border-slate-200">
+          <span class="text-[10px] text-slate-400 font-bold block mb-1">Preview Format Pesan WhatsApp:</span>
+          <p id="wa-preview-text" class="text-xs text-slate-700 italic font-mono whitespace-pre-wrap">Halo, saya ingin menyampaikan informasi/pengaduan terkait *Pelayanan Paspor*.</p>
+        </div>
+
+        <button onclick="sendToWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm rounded-lg shadow-sm flex items-center justify-center transition">
+          <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Kirim Pesan ke WhatsApp (085274656300)
+        </button>
+      </div>
+    </div>
+
+    <!-- 4. M-PASPOR PAGE -->
+    <div id="page-mpaspor" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 hidden">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="text-base md:text-lg font-bold text-brand-navy flex items-center">
+          <i class="fa-solid fa-mobile-retro text-purple-600 mr-2"></i> Pendaftaran Paspor via M-Paspor
+        </h3>
+        <button onclick="showPage('home')" class="text-xs text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="bg-purple-50 border border-purple-200 p-4 rounded-xl text-xs md:text-sm text-purple-900 space-y-1">
+        <h4 class="font-bold">Apa itu M-Paspor?</h4>
+        <p>Aplikasi M-Paspor memungkinkan Anda mendaftar antrean, mengisi biodata, dan mengunggah berkas permohonan paspor secara mandiri dari smartphone.</p>
+      </div>
+
+      <div class="flex space-x-3">
+        <a href="https://play.google.com/store/apps/details?id=id.go.imigrasi.paspor_online" target="_blank" class="flex-1 flex items-center justify-center bg-slate-900 text-white p-3 rounded-xl text-xs hover:bg-black transition">
+          <i class="fa-brands fa-google-play text-xl mr-2 text-emerald-400"></i> Google Play Store
+        </a>
+        <a href="https://apps.apple.com/id/app/m-paspor/id1582231268" target="_blank" class="flex-1 flex items-center justify-center bg-slate-900 text-white p-3 rounded-xl text-xs hover:bg-black transition">
+          <i class="fa-brands fa-apple text-xl mr-2 text-slate-200"></i> Apple App Store
+        </a>
+      </div>
+
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs md:text-sm space-y-2">
+        <h4 class="font-bold text-slate-800">Tata Cara Pendaftaran M-Paspor:</h4>
+        <ol class="list-decimal list-inside space-y-1.5 text-slate-600">
+          <li>Unduh dan registrasi akun M-Paspor.</li>
+          <li>Pilih **Kantor Imigrasi Kelas I Non TPI Agam**.</li>
+          <li>Isi data pemohon dan unggah persyaratan dokumen.</li>
+          <li>Lakukan pembayaran PNBP via Bank / Internet Banking.</li>
+          <li>Datang ke Kantor Imigrasi Agam sesuai jadwal membawa dokumen asli.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 5. VISA & IZIN TINGGAL PAGE -->
+    <div id="page-izin" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 hidden">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="text-base md:text-lg font-bold text-brand-navy flex items-center">
+          <i class="fa-solid fa-id-card text-amber-500 mr-2"></i> Visa & Izin Tinggal Keimigrasian
+        </h3>
+        <button onclick="showPage('home')" class="text-xs text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-4 rounded-xl shadow-sm space-y-2">
+        <h4 class="font-bold text-sm md:text-base"><i class="fa-solid fa-globe mr-1"></i> Portal Resmi eVisa Indonesia</h4>
+        <p class="text-xs text-slate-200">Pengajuan dan Perpanjangan Izin Tinggal WNA dapat dilakukan secara daring melalui portal resmi Direktorat Jenderal Imigrasi.</p>
+        <a href="https://evisa.imigrasi.go.id/" target="_blank" class="inline-block bg-brand-gold text-slate-900 font-bold text-xs py-2 px-4 rounded-lg hover:bg-yellow-400 transition">
+          Buka evisa.imigrasi.go.id <i class="fa-solid fa-external-link ml-1"></i>
+        </a>
+      </div>
+
+      <div class="flex border-b border-slate-200 bg-slate-100 p-1 rounded-lg text-xs md:text-sm font-semibold">
+        <button onclick="switchIzinTab('itk')" id="tab-itk" class="flex-1 py-2 rounded-md bg-white text-brand-navy shadow-sm transition">ITK (Kunjungan)</button>
+        <button onclick="switchIzinTab('itas')" id="tab-itas" class="flex-1 py-2 text-slate-500 hover:text-slate-800 transition">ITAS (Terbatas)</button>
+        <button onclick="switchIzinTab('itap')" id="tab-itap" class="flex-1 py-2 text-slate-500 hover:text-slate-800 transition">ITAP (Tetap)</button>
+      </div>
+
+      <div id="content-itk" class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm space-y-2">
+        <h4 class="font-bold text-brand-navy">Izin Tinggal Kunjungan (ITK)</h4>
+        <p class="text-slate-600">Diberikan kepada Orang Asing yang tinggal sementara di Indonesia untuk kunjungan wisata, bisnis, atau dinas.</p>
+      </div>
+
+      <div id="content-itas" class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm space-y-2 hidden">
+        <h4 class="font-bold text-brand-navy">Izin Tinggal Terbatas (ITAS)</h4>
+        <p class="text-slate-600">Diberikan kepada Orang Asing untuk jangka menengah (bekerja, penyatuan keluarga, investasi).</p>
+      </div>
+
+      <div id="content-itap" class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm space-y-2 hidden">
+        <h4 class="font-bold text-brand-navy">Izin Tinggal Tetap (ITAP)</h4>
+        <p class="text-slate-600">Diberikan kepada Orang Asing tertentu untuk bertempat tinggal menetap sebagai penduduk Indonesia.</p>
+      </div>
+    </div>
+
+    <!-- 6. STATISTIK PENGADUAN PAGE -->
+    <div id="page-statistik" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 hidden">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="text-base md:text-lg font-bold text-brand-navy flex items-center">
+          <i class="fa-solid fa-chart-pie text-brand-gold mr-2"></i> Rekapitulasi & Statistik Laporan
+        </h3>
+        <button onclick="showPage('home')" class="text-xs text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-3 gap-3">
+        <div class="bg-blue-50 border border-blue-200 p-3 rounded-xl text-center">
+          <span class="text-xs font-bold text-blue-600 block">Total Laporan</span>
+          <span class="text-xl font-extrabold text-brand-navy">128</span>
+        </div>
+        <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-center">
+          <span class="text-xs font-bold text-emerald-600 block">Selesai</span>
+          <span class="text-xl font-extrabold text-emerald-700">118</span>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-center">
+          <span class="text-xs font-bold text-amber-600 block">Diproses</span>
+          <span class="text-xl font-extrabold text-amber-700">10</span>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-2">
+        <h4 class="text-xs md:text-sm font-bold text-slate-700">Daftar Rekap Laporan Pengaduan</h4>
+        <button onclick="downloadCSVReport()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-1.5 px-3 rounded-lg flex items-center shadow-sm transition">
+          <i class="fa-solid fa-file-csv mr-1.5"></i> Unduh Laporan (CSV)
+        </button>
+      </div>
+
+      <!-- Search Box -->
+      <div class="relative">
+        <input type="text" id="search-pengaduan-input" onkeyup="filterPengaduanTable()" placeholder="Cari berdasarkan Nama Pemohon atau Kode Laporan..." class="w-full pl-9 pr-3 py-2 text-xs md:text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-blue">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
+      </div>
+
+      <!-- Table -->
+      <div class="overflow-x-auto">
+        <table id="table-rekap-pengaduan" class="w-full text-left border-collapse text-xs md:text-sm">
+          <thead>
+            <tr class="bg-slate-100 text-slate-600 border-b border-slate-200">
+              <th class="p-2.5 font-bold">No Tiket / Nama</th>
+              <th class="p-2.5 font-bold">Kategori</th>
+              <th class="p-2.5 font-bold text-center">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700">
+            <tr class="pengaduan-row">
+              <td class="p-2.5 font-medium">#AGM-1024 - Rahmat Hidayat</td>
+              <td class="p-2.5">Paspor Hilang</td>
+              <td class="p-2.5 text-center"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-xs font-bold">Selesai</span></td>
+            </tr>
+            <tr class="pengaduan-row">
+              <td class="p-2.5 font-medium">#AGM-1025 - Siti Aminah</td>
+              <td class="p-2.5">M-Paspor Error</td>
+              <td class="p-2.5 text-center"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-xs font-bold">Selesai</span></td>
+            </tr>
+            <tr class="pengaduan-row">
+              <td class="p-2.5 font-medium">#AGM-1026 - Ahmad Fauzi</td>
+              <td class="p-2.5">Perpanjang ITAS</td>
+              <td class="p-2.5 text-center"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-bold">Diproses</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 7. MEDIA SOSIAL PAGE -->
+    <div id="page-sosmed" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 hidden">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="text-base md:text-lg font-bold text-brand-navy flex items-center">
+          <i class="fa-solid fa-hashtag text-brand-gold mr-2"></i> Media Sosial Resmi Kanim Agam
+        </h3>
+        <button onclick="showPage('home')" class="text-xs text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <a href="https://www.instagram.com/kanim.agam/" target="_blank" class="flex items-center p-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl shadow-sm hover:opacity-90 transition">
+          <i class="fa-brands fa-instagram text-3xl mr-3"></i>
+          <div>
+            <span class="text-sm font-bold block">Instagram Official</span>
+            <span class="text-xs text-pink-100">@kanim.agam</span>
+          </div>
+        </a>
+
+        <a href="https://www.tiktok.com/@imigrasi.agam" target="_blank" class="flex items-center p-4 bg-slate-900 text-white rounded-xl shadow-sm hover:bg-black transition">
+          <i class="fa-brands fa-tiktok text-3xl mr-3"></i>
+          <div>
+            <span class="text-sm font-bold block">TikTok Official</span>
+            <span class="text-xs text-slate-300">@imigrasi.agam</span>
+          </div>
+        </a>
+
+        <a href="https://www.facebook.com/imigrasi.agam/" target="_blank" class="flex items-center p-4 bg-blue-600 text-white rounded-xl shadow-sm hover:bg-blue-700 transition">
+          <i class="fa-brands fa-facebook text-3xl mr-3"></i>
+          <div>
+            <span class="text-sm font-bold block">Facebook Page</span>
+            <span class="text-xs text-blue-100">Imigrasi Agam</span>
+          </div>
+        </a>
+
+        <a href="https://twitter.com/imigrasi_agam" target="_blank" class="flex items-center p-4 bg-sky-500 text-white rounded-xl shadow-sm hover:bg-sky-600 transition">
+          <i class="fa-brands fa-x-twitter text-3xl mr-3"></i>
+          <div>
+            <span class="text-sm font-bold block">X / Twitter</span>
+            <span class="text-xs text-sky-100">@imigrasi_agam</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-navy text-white text-xs py-6 mt-8 border-t border-slate-700">
+    <div class="max-w-6xl mx-auto px-4 text-center md:flex md:justify-between md:items-center space-y-2 md:space-y-0">
+      <p class="text-slate-300">© Kantor Imigrasi Kelas I Non TPI Agam. Portal SIAGA.</p>
+      <p class="text-slate-400">Jl. Raya Bukittinggi - Payakumbuh Km. 9, Koto Hilir, Kab. Agam, Sumatera Barat.</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT APP LOGIC -->
   <script>
     let currentCategory = "Pelayanan Paspor";
     const OFFICIAL_WA = "6285274656300";
 
     function showPage(pageId) {
-      const pages = ['home', 'info', 'pengaduan', 'mpaspor', 'izin', 'statistik', 'sosmed', 'tentang'];
-      
+      const pages = ['home', 'info', 'pengaduan', 'mpaspor', 'izin', 'statistik', 'sosmed'];
       pages.forEach(p => {
         const el = document.getElementById(`page-${p}`);
         if (el) {
@@ -783,83 +577,36 @@
           }
         }
       });
-
-      const navItems = ['home', 'info', 'pengaduan', 'tentang'];
-      navItems.forEach(item => {
-        const navEl = document.getElementById(`nav-${item}`);
-        if (navEl) {
-          if (item === pageId) {
-            navEl.className = "flex flex-col items-center text-brand-navy font-bold";
-          } else {
-            navEl.className = "flex flex-col items-center text-slate-400 hover:text-brand-navy";
-          }
-        }
-      });
-
-      document.getElementById('mobile-screen-body').scrollTop = 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function toggleView(mode) {
-      const frame = document.getElementById('phone-frame');
-      const btnMobile = document.getElementById('btn-mobile-view');
-      const btnDesktop = document.getElementById('btn-desktop-view');
-
-      if (mode === 'desktop') {
-        frame.className = "w-full max-w-4xl bg-slate-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 border border-slate-700";
-        btnDesktop.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-gold text-slate-900 transition hover:bg-yellow-400";
-        btnMobile.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-700 text-slate-300 transition hover:bg-slate-600";
-      } else {
-        frame.className = "w-full max-w-[380px] bg-slate-800 rounded-[48px] shadow-2xl overflow-hidden border-[8px] border-slate-800 ring-1 ring-slate-700 relative transition-all duration-300";
-        btnMobile.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-gold text-slate-900 transition hover:bg-yellow-400";
-        btnDesktop.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-700 text-slate-300 transition hover:bg-slate-600";
-      }
-    }
-
-    function selectCategory(categoryName) {
-      currentCategory = categoryName;
-      document.getElementById('selected-cat-title').innerText = categoryName;
-
-      document.getElementById('cat-paspor').className = "p-3 rounded-xl border border-slate-200 bg-slate-50 hover:border-brand-blue cursor-pointer transition flex items-center justify-between";
-      document.getElementById('cat-izin').className = "p-3 rounded-xl border border-slate-200 bg-slate-50 hover:border-brand-blue cursor-pointer transition flex items-center justify-between";
-      document.getElementById('cat-inteldak').className = "p-3 rounded-xl border border-slate-200 bg-slate-50 hover:border-brand-blue cursor-pointer transition flex items-center justify-between";
-
-      if (categoryName.includes('Paspor')) {
-        document.getElementById('cat-paspor').className = "p-3 rounded-xl border-2 border-brand-blue bg-blue-50/50 cursor-pointer transition flex items-center justify-between shadow-sm";
-      } else if (categoryName.includes('Izin')) {
-        document.getElementById('cat-izin').className = "p-3 rounded-xl border-2 border-brand-blue bg-blue-50/50 cursor-pointer transition flex items-center justify-between shadow-sm";
-      } else if (categoryName.includes('Inteldak')) {
-        document.getElementById('cat-inteldak').className = "p-3 rounded-xl border-2 border-brand-blue bg-blue-50/50 cursor-pointer transition flex items-center justify-between shadow-sm";
-      }
-
+    function selectCategory(catName) {
+      currentCategory = catName;
+      document.getElementById('selected-cat-title').innerText = catName;
       updateWAPreview();
     }
 
     function updateWAPreview() {
       const text = document.getElementById('input-pesan').value;
-      const previewEl = document.getElementById('wa-preview-text');
-      
-      let formattedText = `Halo, saya ingin menyampaikan informasi/pengaduan terkait *${currentCategory}*.`;
+      let msg = `Halo, saya ingin menyampaikan informasi/pengaduan terkait *${currentCategory}*.`;
       if (text.trim() !== "") {
-        formattedText += `\n\n*Rincian Pesan:*\n${text}`;
+        msg += `\n\n*Rincian Pesan:*\n${text}`;
       }
-      previewEl.innerText = formattedText;
+      document.getElementById('wa-preview-text').innerText = msg;
     }
 
     function sendToWhatsApp() {
-      const inputVal = document.getElementById('input-pesan').value;
+      const text = document.getElementById('input-pesan').value;
       let msg = `Halo, saya ingin menyampaikan informasi/pengaduan terkait *${currentCategory}*.`;
-      if (inputVal.trim() !== "") {
-        msg += `\n\n*Rincian Pesan:*\n${inputVal}`;
+      if (text.trim() !== "") {
+        msg += `\n\n*Rincian Pesan:*\n${text}`;
       }
-      
-      const encodedMsg = encodeURIComponent(msg);
-      window.open(`https://wa.me/${OFFICIAL_WA}?text=${encodedMsg}`, '_blank');
+      window.open(`https://wa.me/${OFFICIAL_WA}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     function toggleAccordion(id) {
       const content = document.getElementById(`acc-${id}`);
       const icon = document.getElementById(`icon-${id}`);
-      
       if (content.classList.contains('hidden')) {
         content.classList.remove('hidden');
         icon.className = "fa-solid fa-chevron-up text-brand-blue";
@@ -876,13 +623,11 @@
         const content = document.getElementById(`acc-${t}`);
         if (btn && content) {
           if (t === type) {
-            btn.className = "px-3 py-1.5 text-xs font-bold rounded-lg bg-brand-navy text-white shadow-sm transition";
+            btn.className = "px-4 py-2 font-bold rounded-lg bg-brand-navy text-white shadow-sm transition";
             content.classList.remove('hidden');
-            document.getElementById(`icon-${t}`).className = "fa-solid fa-chevron-up text-brand-blue";
           } else {
-            btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition";
+            btn.className = "px-4 py-2 font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition";
             content.classList.add('hidden');
-            document.getElementById(`icon-${t}`).className = "fa-solid fa-chevron-down text-slate-400";
           }
         }
       });
@@ -894,10 +639,10 @@
         const btn = document.getElementById(`tab-${t}`);
         const content = document.getElementById(`content-${t}`);
         if (t === tab) {
-          btn.className = "flex-1 py-1.5 text-xs font-bold rounded-md bg-white text-brand-navy shadow-sm transition";
+          btn.className = "flex-1 py-2 rounded-md bg-white text-brand-navy shadow-sm transition font-bold";
           content.classList.remove('hidden');
         } else {
-          btn.className = "flex-1 py-1.5 text-xs font-semibold text-slate-500 hover:text-slate-800 transition";
+          btn.className = "flex-1 py-2 text-slate-500 hover:text-slate-800 transition font-medium";
           content.classList.add('hidden');
         }
       });
@@ -906,10 +651,8 @@
     function filterPengaduanTable() {
       const input = document.getElementById('search-pengaduan-input').value.toLowerCase();
       const rows = document.querySelectorAll('.pengaduan-row');
-
       rows.forEach(row => {
-        const text = row.innerText.toLowerCase();
-        if (text.includes(input)) {
+        if (row.innerText.toLowerCase().includes(input)) {
           row.style.display = "";
         } else {
           row.style.display = "none";
@@ -918,20 +661,14 @@
     }
 
     function downloadCSVReport() {
-      let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "No Tiket / Nama,Kategori Pengaduan,Status Laporan\n";
-
+      let csvContent = "data:text/csv;charset=utf-8,No Tiket / Nama,Kategori,Status\n";
       const rows = document.querySelectorAll('.pengaduan-row');
       rows.forEach(row => {
         if (row.style.display !== "none") {
           const cols = row.querySelectorAll('td');
-          const noNama = cols[0].innerText.replace(/\n/g, " - ");
-          const kategori = cols[1].innerText;
-          const status = cols[2].innerText;
-          csvContent += `"${noNama}","${kategori}","${status}"\n`;
+          csvContent += `"${cols[0].innerText}","${cols[1].innerText}","${cols[2].innerText}"\n`;
         }
       });
-
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
